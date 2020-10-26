@@ -207,13 +207,13 @@ class App extends Component {
                         </Paper>
                     </Grid>
                 </Grid>
-                <Button
+                {/* <Button
                     variant='contained'
                     className={classes.button}
                     onClick={this.showData}
                 >
                     Show User JSON
-                </Button>
+                </Button> */}
             </div>
         )
     }
