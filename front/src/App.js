@@ -6,8 +6,8 @@ import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import {
-    addTodo,
-    removeTodo,
+    addGoal,
+    removeGoal,
     setUser,
     addNewItemSocket,
     removeItemSocket,
@@ -15,8 +15,8 @@ import {
 } from './store/actions/Action'
 import { withStyles } from '@material-ui/styles'
 import UsernameForm from './components/UsernameForm/UsernameForm'
-import AddTodoField from './components/AddTodoField/AddTodoField'
-import TodoList from './components/TodoList/TodoList'
+import AddGoalField from './components/AddGoalField/AddGoalField'
+import GoalList from './components/GoalList/GoalList'
 
 const styles = (theme) => ({
     root: {
@@ -38,7 +38,7 @@ const styles = (theme) => ({
         display: 'flex',
         width: '40%',
     },
-    todoList: {
+    goalList: {
         display: 'flex',
         flexDirection: 'column',
         width: '60%',
@@ -71,11 +71,11 @@ class App extends Component {
         })
 
         socket.on('itemAdded', (res) => {
-            dispatch(addTodo(res))
+            dispatch(addGoal(res))
         })
 
         socket.on('itemRemoved', (res) => {
-            dispatch(removeTodo(res))
+            dispatch(removeGoal(res))
         })
 
         this.keyPress = this.keyPress.bind(this)
@@ -167,22 +167,22 @@ class App extends Component {
                                 ></UsernameForm>
                             </div>
 
-                            <div className={classes.todoList}>
+                            <div className={classes.goalList}>
                                 <Paper style={{ width: '100%' }}>
                                     {this.state.isValid ? (
                                         <Typography variant='h5' gutterBottom>
-                                            {currentUser}'s To do List
+                                            {currentUser}'s Goal List
                                         </Typography>
                                     ) : (
                                         <Typography variant='h5' gutterBottom>
-                                            To do List
+                                            Goals List
                                         </Typography>
                                     )}
                                 </Paper>
                                 {this.state.isValid ? (
-                                    <AddTodoField
+                                    <AddGoalField
                                         addNew={this.addNew}
-                                    ></AddTodoField>
+                                    ></AddGoalField>
                                 ) : (
                                     <div />
                                 )}
@@ -193,12 +193,12 @@ class App extends Component {
                                             overflow: 'auto',
                                         }}
                                     >
-                                        <TodoList
+                                        <GoalList
                                             users={users}
                                             isValid={this.state.isValid}
                                             currentUser={currentUser}
                                             removeItem={this.removeItem}
-                                        ></TodoList>
+                                        ></GoalList>
                                     </div>
                                 ) : (
                                     <div />
